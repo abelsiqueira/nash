@@ -5,3 +5,7 @@ all:
 
 run:
 	firefox nash.html &
+
+debug:
+	lime build flash -debug
+	cp Export/flash/bin/Nash.swf Nash.swf
