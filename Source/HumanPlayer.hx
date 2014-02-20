@@ -9,8 +9,6 @@ class HumanPlayer extends Player {
   public function new (x:Float=320, y:Float=240) {
     super(x,y);
 
-    graphic = Image.createCircle(10, 0x0000ff);
-
     Input.define("left",  [Key.LEFT,  Key.A]);
     Input.define("right", [Key.RIGHT, Key.D]);
     Input.define("up",    [Key.UP,    Key.W]);

@@ -16,14 +16,29 @@ class Player extends Entity {
   private var friction:Float = 0.9;
   private var timestep:Float = 1e-1;
 
+  static private var color_count:Int = 0;
+  private var color;
+
   private var targets:Array<Target>;
 
   public function new (x:Float=320, y:Float=240) {
     super(x,y);
 
     targets = new Array();
+    var r:Int = color_count%2;
+    var g:Int = Std.int(color_count/2)%2;
+    var b:Int = Std.int(color_count/4)%2;
+
+    color = 0xaf0000*r + 0x00af00*g + 0x0000af*b;
+
+    graphic = Image.createCircle(10, color);
+    color_count++;
 
     veloc = new Vector(0,0);
+  }
+
+  public function getColor () : Int {
+    return color;
   }
 
   public function addTarget (p:Player, d:Float) {

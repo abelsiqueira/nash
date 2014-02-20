@@ -16,8 +16,6 @@ class AIPlayer extends Player {
 
     d = new Vector(0,0);
     this.ai = ai;
-
-    graphic = Image.createCircle(10, 0xff0000);
   }
 
   public function setAI (ai:Int) {
