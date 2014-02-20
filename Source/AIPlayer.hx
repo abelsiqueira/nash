@@ -1,10 +1,10 @@
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.math.Vector;
+import com.haxepunk.utils.Draw;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.graphics.Image;
-import flash.display.Shape;
 
 class AIPlayer extends Player {
   
@@ -12,19 +12,17 @@ class AIPlayer extends Player {
   private var counts_dir_change:Int = 300;
   private var d:Vector;
   private var ai:Int;
-  private var line:Shape;
+
+  private static var ai_counter:Int = 0;
 
   public function new (x:Float=320, y:Float=240, ai:Int=0) {
     super(x,y);
 
-    line = new Shape();
     acceleration *= 0.5;
     d = new Vector(0,0);
-    this.ai = ai;
-  }
-
-  public function begin() {
-    HXP.stage.addChild(line);
+//    this.ai = ai;
+    this.ai = ai_counter;
+    ai_counter++;
   }
 
   public function setAI (ai:Int) {
@@ -33,10 +31,6 @@ class AIPlayer extends Player {
 
   override public function update () {
     super.update();
-    line.graphics.clear();
-    line.graphics.lineStyle(5, 0xff0000);
-    line.graphics.moveTo(x,y);
-    line.graphics.lineTo(targets[0].player.x, targets[0].player.y);
 
     getNewDirection(d);
 
@@ -49,6 +43,8 @@ class AIPlayer extends Player {
       localMinimizerDirection(d);
     else if (ai == 2)
       randomDirection(d);
+    else {
+    }
   }
 
   private function localMinimizerDirection (d:Vector) {
@@ -65,7 +61,7 @@ class AIPlayer extends Player {
 
   private function randomDirection (d:Vector) {
     counter++;
-    if (counter > counts_dir_change) {
+    if (counter > counts_dir_change || hitwall) {
       d.x = Std.random(3) - 1;
       d.y = Std.random(3) - 1;
       counter = 0;

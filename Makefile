@@ -1,4 +1,5 @@
-BROWSER=chromium
+#BROWSER=chromium
+BROWSER=firefox
 
 all:
 	lime build flash

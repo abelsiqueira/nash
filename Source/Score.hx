@@ -7,6 +7,7 @@ class Score extends Entity {
 
   private var player:Player;
   private var score:Text;
+  private static var scaling:Float = 331776;  
 
   public function new (x:Float, y:Float, p:Player) {
     super(x, y);
@@ -25,8 +26,8 @@ class Score extends Entity {
   override public function update () {
     super.update();
 
-    score.text = Std.string(Std.int(Math.sqrt(Math.sqrt(
-        player.objectiveValue()/50000000))));
+    score.text = Std.string(Std.int(Math.sqrt(
+        player.objectiveValue()/scaling)));
   }
 
 }

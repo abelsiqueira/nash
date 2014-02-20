@@ -23,6 +23,11 @@ class Arena extends Scene {
       add(new Score(9*w, k*h, player));
       k += 2;
     }
+
+    add(new Wall(0, 0, 9*w, 5));
+    add(new Wall(0, 0, 5, 10*h));
+    add(new Wall(9*w-5, 0, 5, 10*h));
+    add(new Wall(0, 10*h-5, 9*w-5, 5));
   }
 
   override public function begin() {

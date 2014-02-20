@@ -15,6 +15,7 @@ class Player extends Entity {
   private var acceleration:Float = 3.0;
   private var friction:Float = 0.9;
   private var timestep:Float = 1e-1;
+  private var hitwall:Bool = false;
 
   static private var color_count:Int = 0;
   private var color:Int;
@@ -31,8 +32,12 @@ class Player extends Entity {
 
     color = 0xaf0000*r + 0x00af00*g + 0x0000af*b;
 
-    graphic = Image.createCircle(10, color);
+    var image:Image = Image.createCircle(10, color);
+    image.x = -10;
+    image.y = -10;
+    graphic = image;
     color_count++;
+    setHitbox(20, 20, 10, 10);
 
     veloc = new Vector(0,0);
   }
@@ -56,13 +61,24 @@ class Player extends Entity {
     veloc.x += d.x * acceleration/2;
     veloc.y += d.y * acceleration/2;
 
-    moveBy(veloc.x, veloc.y);
+    hitwall = false;
+    moveBy(veloc.x, veloc.y, "wall");
 
     veloc.x += d.x * acceleration/2;
     veloc.y += d.y * acceleration/2;
 
     veloc.x *= friction;
     veloc.y *= friction;
+  }
+
+  override public function moveCollideX(e:Entity) : Bool {
+    hitwall = true;
+    return true;
+  }
+
+  override public function moveCollideY(e:Entity) : Bool {
+    hitwall = true;
+    return true;
   }
 
   public function objectiveValue () : Float {
