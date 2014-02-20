@@ -13,12 +13,15 @@ class Arena extends Scene {
     var w:Int = Std.int(0.1*HXP.width);
     var h:Int = Std.int(0.1*HXP.height);
     players.push(new AIPlayer(  w,  h,1));
-    players.push(new AIPlayer(9*w,  h,1));
-    players.push(new AIPlayer(9*w,9*h,1));
-    players.push(new AIPlayer(  w,9*h,1));
+    players.push(new AIPlayer(8*w,  h,1));
+    players.push(new AIPlayer(8*w,8*h,1));
+    players.push(new AIPlayer(  w,8*h,1));
 
+    var k:Int = 1;
     for (player in players) {
       add(player);
+      add(new Score(9*w, k*h, player));
+      k += 2;
     }
   }
 

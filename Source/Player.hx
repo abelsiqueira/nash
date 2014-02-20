@@ -17,7 +17,7 @@ class Player extends Entity {
   private var timestep:Float = 1e-1;
 
   static private var color_count:Int = 0;
-  private var color;
+  private var color:Int;
 
   private var targets:Array<Target>;
 
@@ -63,6 +63,18 @@ class Player extends Entity {
 
     veloc.x *= friction;
     veloc.y *= friction;
+  }
+
+  public function objectiveValue () : Float {
+    var f:Float = 0.0;
+    for (target in targets) {
+      var dist:Float = Math.pow(target.player.x - x, 2) +
+          Math.pow(target.player.y - y, 2) -
+          Math.pow(target.dist, 2);
+      f += dist*dist;
+    }
+
+    return f;
   }
 
 }

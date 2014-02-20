@@ -14,6 +14,7 @@ class AIPlayer extends Player {
   public function new (x:Float=320, y:Float=240, ai:Int=0) {
     super(x,y);
 
+    acceleration *= 0.5;
     d = new Vector(0,0);
     this.ai = ai;
   }
@@ -42,8 +43,9 @@ class AIPlayer extends Player {
     d.x = 0;
     d.y = 0;
     for (target in targets) {
-      var dist:Float = Math.pow(target.player.x - x,2) +
-        Math.pow(target.player.y - y,2) - Math.pow(target.dist,2);
+      var dist:Float = Math.pow(target.player.x - x, 2) +
+          Math.pow(target.player.y - y, 2) - 
+          Math.pow(target.dist, 2);
       d.x -= (x - target.player.x)*dist;
       d.y -= (y - target.player.y)*dist;
     }
